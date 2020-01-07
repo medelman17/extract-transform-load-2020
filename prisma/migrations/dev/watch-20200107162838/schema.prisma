@@ -1,0 +1,28 @@
+datasource db {
+    provider = "postgresql"
+    url = "***"
+}
+
+generator photon {
+    provider = "photonjs"
+}
+
+model Character {
+    id          String          @id @default(uuid())
+    createdAt   DateTime        @default(now())
+    updatedAt   DateTime        @updatedAt
+    name        String
+    unicode     String          @unique
+    unicode_int Int             @unique
+    block       CharacterBlock?
+}
+
+model CharacterBlock {
+    id         String      @id @default(uuid())
+    createdAt  DateTime    @default(now())
+    updatedAt  DateTime    @updatedAt
+    name       String      @unique
+    start      Int
+    end        Int
+    characters Character[]
+}
